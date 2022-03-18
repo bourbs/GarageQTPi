@@ -30,7 +30,8 @@ class GarageDoor(object):
         # Set relay pin to output, state pin to input, and add a change
         # listener to the state pin
         GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BCM)
+        # set GPIO pin numbering mode GPIO.BCM or GPIO.BOARD
+        GPIO.setmode(GPIO.BOARD)
         # Initial output value = high if self.invert_relay is True
         GPIO.setup(self.relay_pin, GPIO.OUT, initial=self.invert_relay)
         GPIO.setup(self.state_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
