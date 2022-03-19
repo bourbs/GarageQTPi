@@ -116,9 +116,9 @@ class TwoSwitchGarageDoor(GarageDoor):
         # Read the mode from the config. Then compare the mode to the current state. IE. If the circuit is normally closed and the state is 1 then the circuit is closed.
         # and vice versa for normally open
         # 
-        closed_state = True if GPIO.input(self.state_pin) == self.mode else False
-        open_state = True if GPIO.input(self.open_pin) == self.mode else False
-        moving_state = True if GPIO.input(self.open_pin) != self.mode & GPIO.input(self.state_pin) != self.mode else False
+        closed_state = True if GPIO.input(self.state_pin) == GPIO.LOW else False
+        open_state = True if GPIO.input(self.open_pin) == GPIO.LOW else False
+        moving_state = True if open_state == False & closed_state == False else False
         if closed_state:
             self._state = 'closed'
         elif open_state:
