@@ -118,7 +118,7 @@ class TwoSwitchGarageDoor(GarageDoor):
         # 
         closed_state = True if GPIO.input(self.state_pin) == self.mode else False
         open_state = True if GPIO.input(self.open_pin) == self.mode else False
-        moving_state = True if GPIO.input(self.open_bin) != self.mode & GPIO.input(self.open_bin) != self.mode else False
+        moving_state = True if GPIO.input(self.open_pin) != self.mode & GPIO.input(self.open_pin) != self.mode else False
         if closed_state:
             self._state = 'closed'
         elif open_state:
