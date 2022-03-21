@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 from .eventhook import EventHook
 
 
-SHORT_WAIT = .2  # S (200ms)
+SHORT_WAIT = .5  # S (200ms)
 """
     The purpose of this class is to map the idea of a garage door to the pinouts on
     the raspberrypi. It provides methods to control the garage door and also provides

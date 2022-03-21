@@ -264,6 +264,8 @@ if __name__ == "__main__":
         if discovery is True:
 
             discovery_info["name"] = doorCfg['name']
+            discovery_info["unique_id"] = 'garage_door'
+            discovery_info["device_class"] = 'garage'
             discovery_info["command_topic"] = doorCfg['command_topic']
             discovery_info["state_topic"] = doorCfg['state_topic']
             discovery_info["availability_topic"] = availability_topic
@@ -276,7 +278,7 @@ if __name__ == "__main__":
                 retain=True)
 
             logging.info(
-                "Sent audodiscovery config: " +
+                "Sent auto discovery config: " +
                 json.dumps(
                     discovery_info,
                     indent=4))
