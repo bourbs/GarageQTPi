@@ -30,11 +30,9 @@ garage_doors = []
 
 def update_state(value, topic):
     logging.info("State change triggered: %s -> %s" % (topic, value))
-
     client.publish(topic, value, retain=True)
 
 # The callback for when the client receives a CONNACK response from the server.
-
 
 def on_connect(client, userdata, flags, rc):
     logging.info("Connected with result code: %s" % mqtt.connack_string(rc))
@@ -59,7 +57,6 @@ def on_connect(client, userdata, flags, rc):
 
 # Execute the specified command for a door
 
-
 def execute_command(door, command):
     try:
         doorName = door.name
@@ -74,8 +71,6 @@ def execute_command(door, command):
         door.stop()
     else:
         logging.info("Invalid command: %s" % command)
-
-
 
 CONFIG_SCHEMA = vol.Schema(
     {
@@ -95,8 +90,6 @@ CONFIG_SCHEMA = vol.Schema(
             vol.Optional("availability_topic", default = DEFAULT_AVAILABILITY_TOPIC): Any(str, None),
             vol.Optional("payload_available", default = DEFAULT_PAYLOAD_AVAILABLE): Any(str,None),
             vol.Optional("payload_not_available", default = DEFAULT_PAYLOAD_NOT_AVAILABLE ): Any(str, None)
-
-
         }
     ),
     "doors": [vol.Schema(
@@ -184,9 +177,7 @@ client = mqtt.Client(client_id="MQTTGarageDoor_{:6s}".format(str(random.randint(
     0, 999999))), clean_session=True, userdata=None, protocol=mqtt.MQTTv311)
 
 client.on_connect = on_connect
-
 client.username_pw_set(user, password=password)
-
 
 # set a last will message so the broker will notify connected clients when
 # we are not available
@@ -198,10 +189,7 @@ logging.info(
     availability_topic +
     "'")
 
-
 client.connect(host, port, 60)
-
-
 ### SETUP END ###
 
 ### MAIN LOOP ###
@@ -262,10 +250,9 @@ if __name__ == "__main__":
 
         # If discovery is enabled publish configuration
         if discovery is True:
-
             discovery_info["name"] = doorCfg['name']
-            discovery_info["unique_id"] = 'garage_door'
-            discovery_info["device_class"] = 'garage'
+            discovery_info["unique_id"] = "garage_door_1"
+            discovery_info["device_class"] = "garage"
             discovery_info["command_topic"] = doorCfg['command_topic']
             discovery_info["state_topic"] = doorCfg['state_topic']
             discovery_info["availability_topic"] = availability_topic
